@@ -1,0 +1,65 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'Vehicle',
+    typeNamePlural: 'Vehicles',
+    title: { type: #STANDARD, value: 'VehicleID' },
+    description: { type: #STANDARD, value: 'registrationno' }
+  }
+}
+annotate view ZC_FLT_VEHICLE_057 with
+{
+  @UI.facet: [
+    { id: 'VehicleHeader', 
+      purpose: #STANDARD, 
+      type: #IDENTIFICATION_REFERENCE, 
+      label: 'Vehicle Details', 
+      position: 10 },
+    { id: 'Trips', 
+      purpose: #STANDARD, 
+      type: #LINEITEM_REFERENCE, 
+      label: 'Trip History', 
+      position: 20, 
+      targetElement: '_Trips' }
+  ]
+
+  @UI.hidden: true
+  VehicleUUID;
+
+  @UI: { lineItem: [{ position: 10 }], 
+         identification: [{ position: 10, label: 'Vehicle ID' }], 
+         selectionField: [{ position: 10 }] }
+  @EndUserText.label: 'Vehicle ID'
+  VehicleID;
+
+  @UI: { lineItem: [{ position: 20 }], 
+         identification: [{ position: 20, label: 'Registration No' }] }
+  @EndUserText.label: 'Registration No'
+  RegistrationNo;
+
+  @UI: { lineItem: [{ position: 30 }], 
+         identification: [{ position: 30, label: 'Type' }], 
+         selectionField: [{ position: 20 }] }
+  @EndUserText.label: 'Vehicle Type'
+  VehicleType;
+
+  @UI: { lineItem: [{ position: 40 }], 
+         identification: [{ position: 40, label: 'Capacity' }] }
+  @EndUserText.label: 'Capacity'
+  Capacity;
+
+  /* UPDATED: Added Criticality for Green Sign */
+  @UI: { lineItem:       [{ position: 50, criticality: 'StatusCriticality' }], 
+         identification: [{ position: 50, label: 'Status', criticality: 'StatusCriticality' }], 
+         selectionField: [{ position: 30 }] }
+  @EndUserText.label: 'Status'
+  Status;
+
+  @UI: { identification: [{ position: 60, label: 'Created At' }] }
+  @EndUserText.label: 'Created At'
+  CreatedAt;
+
+  @UI: { identification: [{ position: 70, label: 'Last Changed' }] }
+  @EndUserText.label: 'Last Changed'
+  LastChangedAt;
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: 'FLEET SDE'
+define service ZSE_FLT {
+  expose ZC_FLT_VEHICLE_057;
+  expose ZC_FLEET_TRIP_057;
+}

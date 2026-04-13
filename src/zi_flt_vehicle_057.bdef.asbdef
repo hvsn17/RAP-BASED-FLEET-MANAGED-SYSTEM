@@ -1,0 +1,67 @@
+unmanaged implementation in class zbp_i_flt_vehicle_057 unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_FLT_VEHICLE_057 alias Vehicle
+draft table zflt_veh_d
+lock master
+total etag LastChangedAt
+authorization master ( global, instance )
+etag master LastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  field ( readonly, numbering : managed ) VehicleUUID;
+  field ( readonly ) LastChangedAt, CreatedAt;
+
+  association _Trips { create; with draft; }
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zflt_vehicle_057
+  {
+    VehicleUUID = vehicleuuid;
+    VehicleID = vehicleid;
+    RegistrationNo = registrationno;
+    VehicleType = vehicletype;
+    Capacity = capacity;
+    Status = status;
+    CreatedAt = createdat;
+    LastChangedAt = lastchangedat;
+  }
+}
+
+define behavior for ZI_FLEET_TRIP_057 alias Trip
+draft table zflt_trip_057_d
+lock dependent by _Vehicle
+authorization dependent by _Vehicle
+etag master LastChangedAt
+{
+  update;
+  delete;
+
+  field ( readonly ) TripUUID, VehicleUUID;
+  field ( readonly ) LastChangedAt;
+
+  association _Vehicle { with draft; }
+
+  mapping for zflt_trip_057
+  {
+    TripUUID = tripuuid;
+    VehicleUUID = vehicleuuid;
+    Source = source;
+    Destination = destination;
+    Distance = distance;
+    StartDate = startdate;
+    EndDate = enddate;
+    Status = status;
+    CreatedAt = createdat;
+    LastChangedAt = lastchangedat;
+  }
+}

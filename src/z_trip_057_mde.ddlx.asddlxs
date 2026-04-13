@@ -1,0 +1,51 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'Trip',
+    typeNamePlural: 'Trips',
+    title: { type: #STANDARD, value: 'Source' },
+    description: { type: #STANDARD, value: 'Destination' }
+  }
+}
+annotate view ZC_FLEET_TRIP_057 with
+{
+  @UI.facet: [
+    { id: 'TripDetails', 
+      purpose: #STANDARD, 
+      type: #IDENTIFICATION_REFERENCE, 
+      label: 'Trip Information', 
+      position: 10 }
+  ]
+
+  @UI.hidden: true
+  TripUUID;
+
+  @UI: { lineItem: [{ position: 10 }], identification: [{ position: 10, label: 'Source' }] }
+  @EndUserText.label: 'Source Location'
+  Source;
+
+  @UI: { lineItem: [{ position: 20 }], identification: [{ position: 20, label: 'Destination' }] }
+  @EndUserText.label: 'Destination Location'
+  Destination;
+
+  @UI: { lineItem: [{ position: 30 }], identification: [{ position: 30, label: 'Distance' }] }
+  @EndUserText.label: 'Distance (KM)'
+  Distance;
+
+  @UI: { lineItem: [{ position: 40 }], identification: [{ position: 40, label: 'Start Date' }] }
+  @EndUserText.label: 'Start Date'
+  StartDate;
+
+  @UI: { lineItem: [{ position: 50 }], identification: [{ position: 50, label: 'End Date' }] }
+  @EndUserText.label: 'End Date'
+  EndDate;
+
+  /* UPDATED: Added Criticality logic if you have it in your Trip view */
+  @UI: { lineItem: [{ position: 60 }], 
+         identification: [{ position: 60, label: 'Trip Status' }] }
+  @EndUserText.label: 'Trip Status'
+  Status;
+
+  @UI.hidden: true
+  VehicleUUID;
+}

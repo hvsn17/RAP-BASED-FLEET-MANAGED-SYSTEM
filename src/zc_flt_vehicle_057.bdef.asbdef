@@ -1,0 +1,28 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZC_FLT_VEHICLE_057 alias Vehicle
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  // Use the association to the child with draft support
+  use association _Trips { create; with draft; }
+}
+
+define behavior for ZC_FLEET_TRIP_057 alias Trip
+{
+  use update;
+  use delete;
+
+  // Use the association back to the parent
+  use association _Vehicle { with draft; }
+}
